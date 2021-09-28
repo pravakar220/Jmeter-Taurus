@@ -1,0 +1,22 @@
+execution:
+- concurrency: 10
+  hold-for: 5m
+  ramp-up: 2m
+  scenario: DuckDuckGoTest
+
+scenarios:
+  DuckDuckGoTest:
+    script: Jmeter-Scripts/DuckDuckGo.jmx
+    modifications:
+      set-prop:
+        "Thread Group>ThreadGroup.num_threads": 10
+        
+reporting:
+- module: final-stats
+  summary: true
+  dump-csv: results.csv
+  dump-xml: results.xml
+- module: junit-xml
+  filename: junitResults.xml
+  data-source: sample-labels
+
